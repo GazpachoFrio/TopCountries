@@ -24,10 +24,13 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   
-    function vote(elementId) {
-      // Implementa la lógica para votar por el país seleccionado
-      console.log(`Votaste por el país con ID ${elementId}`);
-    }
+    function votar() {
+      const select = document.getElementById('selectPaises');
+      const paisSeleccionado = paises.find(pais => pais.id === parseInt(select.value));
+      if (paisSeleccionado) {
+        paisSeleccionado.votos++;
+        alert(`Has votado por ${paisSeleccionado.nombre}. Total de votos: ${paisSeleccionado.votos}`);
+      }
   
     // Función para preseleccionar automáticamente la opción al escribir en el campo de búsqueda
     searchInput.addEventListener('input', function() {
