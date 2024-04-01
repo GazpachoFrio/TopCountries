@@ -219,6 +219,16 @@
     
           paises.forEach(pais => {
             document.write(`<option value="${pais.id}">${pais.nombre}</option>`);
+            paises.sort((a, b) => b.votos - a.votos);
+
+// Mostrar los 10 países más votados
+const top10 = paises.slice(0, 10);
+const topPaisesElement = document.getElementById('topPaises');
+top10.forEach(pais => {
+  const li = document.createElement('li');
+  li.textContent = `${pais.nombre} - ${pais.votos} votos`;
+  topPaisesElement.appendChild(li);
+});
           });
         </script>
         
@@ -227,5 +237,7 @@
   </div>
   <script src="script.js"></script> <!-- Enlaza tu archivo JavaScript -->
   <button onclick="votar()">Votar</button>
+  <h1>Top 10 Países Votados</h1>
+  <ul id="topPaises"></ul>
 </body>
 </html>
