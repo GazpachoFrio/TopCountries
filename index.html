@@ -4,16 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Votación de Países</title>
-  <link rel="stylesheet" href="estilos.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Lista de Países</h1>
-  <input type="text" id="searchInput" placeholder="Buscar país...">
-  <select id="selectPaises"></select>
-    <option value= "">Selecciona un país> </option>
+  <h1>Votación de Países</h1>
+
+  <select id="selectPaises">
+    <!-- Aquí se generan las opciones de la lista de países -->
+  </select>
   <button onclick="votar()">Votar</button>
-  <h2>Top 10 Países Votados</h2>
-  <ul id="topPaisesElement"></ul>
+
+  <h2>Top 10 Países más Votados</h2>
+  <ul id="topPaises"></ul>
+
   <script src="script.js"></script>
 </body>
 </html>

@@ -1,7 +1,4 @@
-// Lista de países
-const paises = [
-  { id: 1, nombre: "Afganistan" ,votos:0 },
-  { id: 2, nombre: "Albania" ,votos: 0 },
+{ id: 2, nombre: "Albania" ,votos: 0 },
   { id: 3, nombre: "Alemania", votos: 0},
   { id: 4, nombre: "Andorra" ,votos: 0},
   { id: 5, nombre: "Angola" ,votos: 0},
@@ -200,62 +197,3 @@ const paises = [
   { id: 196, nombre: "Cook's Island", votos: 0 },
   { id: 197, nombre: "Western Sahara", votos: 0 }
 
-];
-
-// Función para generar las opciones de la lista de países
-function generarOpciones() {
-  const select = document.getElementById('selectPaises');
-  paises.forEach(pais => {
-    const option = document.createElement('option');
-    option.value = pais.id;
-    option.textContent = pais.nombre;
-    select.appendChild(option);
-  });
-}
-
-// Función para votar por un país
-function votar() {
-  const select = document.getElementById('selectPaises');
-  const paisSeleccionado = paises.find(pais => pais.id === parseInt(select.value));
-  if (paisSeleccionado) {
-    // Verificar si el usuario ya votó por este país
-    if (localStorage.getItem(`voto${paisSeleccionado.id}`)) {
-      alert('Ya has votado por este país anteriormente. Solo puedes votar una vez por país.');
-      return;
-    }
-
-    // Incrementar el contador de votos del país seleccionado
-    paisSeleccionado.votos++;
-
-    // Guardar el voto del usuario para este país
-    localStorage.setItem(`voto${paisSeleccionado.id}`, true);
-
-    // Actualizar la lista de países más votados
-    actualizarTopPaises();
-
-    alert(`Has votado por ${paisSeleccionado.nombre}. Total de votos: ${paisSeleccionado.votos}`);
-  }
-}
-
-// Función para obtener los 10 países más votados
-function obtenerTopPaises() {
-  const paisesOrdenados = paises.slice().sort((a, b) => b.votos - a.votos);
-  return paisesOrdenados.slice(0, 10); // Devuelve los 10 primeros países más votados
-}
-
-// Función para actualizar la lista de países más votados en la página
-function actualizarTopPaises() {
-  const topPaises = obtenerTopPaises();
-  const topPaisesElement = document.getElementById('topPaises');
-  topPaisesElement.innerHTML = '';
-  topPaises.forEach(pais => {
-    const li = document.createElement('li');
-    li.textContent = `${pais.nombre} - ${pais.votos} votos`;
-    topPaisesElement.appendChild(li);
-  });
-}
-
-// Al cargar la página, generar las opciones de la lista de países
-generarOpciones();
-// Actualizar la lista de países más votados al cargar la página
-actualizarTopPaises();
