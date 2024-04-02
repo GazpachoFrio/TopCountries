@@ -200,25 +200,17 @@ let paises = [
 
 ];
 
-// Función para actualizar la lista de países según la búsqueda
-function actualizarLista() {
-  const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-  const filteredPaises = paises.filter(pais => pais.nombre.toLowerCase().includes(searchTerm));
-  
-  const selectPaises = document.getElementById('selectPaises');
-  selectPaises.innerHTML = ''; // Limpiar la lista antes de actualizar
-
-  function generarOpciones(paises) {
-    const select = document.getElementById('selectPaises');
-    select.innerHTML = '<option value="">Selecciona un país</option>';
-    paises.forEach(pais => {
-      const option = document.createElement('option');
-      option.value = pais.id;
-      option.textContent = pais.nombre;
-      select.appendChild(option);
-    });
-  }
-    // Función para filtrar la lista de países según la búsqueda
+function generarOpciones(paises) {
+  const select = document.getElementById('selectPaises');
+  select.innerHTML = '<option value="">Selecciona un país</option>';
+  paises.forEach(pais => {
+    const option = document.createElement('option');
+    option.value = pais.id;
+    option.textContent = pais.nombre;
+    select.appendChild(option);
+  });
+}
+    // Función para generar las opciones de la lista de países
     function filtrarPaises(busqueda) {
       const resultado = paises.filter(pais =>
         pais.nombre.toLowerCase().includes(busqueda.toLowerCase())
@@ -229,8 +221,8 @@ function actualizarLista() {
        document.getElementById('busqueda').addEventListener('input', function(event) {
         filtrarPaises(event.target.value);
       });
-}
-generarOpciones(paises);
+
+generarOpciones(resultado);
 
 // Mostrar todos los países al cargar la página
 function actualizarLista();{
