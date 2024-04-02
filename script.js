@@ -223,7 +223,9 @@ function actualizarLista() {
 }
 
 // Mostrar todos los países al cargar la página
-function actualizarLista();
+function actualizarLista();{
+
+}
 
 // Escuchar cambios en el input de búsqueda
 document.getElementById('searchInput').addEventListener('input', actualizarLista);
@@ -256,20 +258,24 @@ function votar() {
   }
 
 
-// Función para actualizar la lista de los 10 países más votados
+  function obtenerTopPaises() {
+    let topPaises = JSON.parse(localStorage.getItem('topPaises'));
+    return topPaises || []; // Devuelve la lista de países más votados o un array vacío si no hay datos
+  }
+  
+// Función para actualizar la lista de países más votados
 function actualizarTopPaises() {
+  let paisesOrdenados = paises.slice().sort((a, b) => b.votos - a.votos);
+  guardarTopPaises(paisesOrdenados.slice(0, 10)); // Guarda solo los primeros 10 países más votados
+   
+  
+  //Muestra la lista de países más votados en la página
+  
   const topPaisesElement = document.getElementById('topPaises');
-  topPaisesElement.innerHTML = ''; // Limpiar la lista antes de actualizar
-
-  // Ordenar la lista de países por votos de mayor a menor
-  paises.sort((a, b) => b.votos - a.votos);
-
-  // Tomar los 10 primeros países más votados
-  const top10 = paises.slice(0, 10);
-  top10.forEach(pais => {
+  topPaisesElement.innerHTML = '';
+  paisesOrdenados.slice(0, 10).forEach(pais => {
     const li = document.createElement('li');
     li.textContent = `${pais.nombre} - ${pais.votos} votos`;
     topPaisesElement.appendChild(li);
   });
 }
-// Función para votar por un país
