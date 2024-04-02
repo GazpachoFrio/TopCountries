@@ -223,21 +223,24 @@ function actualizarLista() {
 }
 
 // Mostrar todos los países al cargar la página
-actualizarLista();
+function actualizarLista();
 
 // Escuchar cambios en el input de búsqueda
 document.getElementById('searchInput').addEventListener('input', actualizarLista);
-
+function obtenerIP() {
+  return '';
+}
 // Función para votar por un país
 function votar() {
   const select = document.getElementById('selectPaises');
   const paisSeleccionado = paises.find(pais => pais.id === parseInt(select.value));
   if (paisSeleccionado) {
     // Verificar si el usuario ya votó
-    const usuarioYaVoto = localStorage.getItem('usuarioVoto');
-    if (usuarioYaVoto) {
-      alert('Ya has votado anteriormente. Solo puedes votar una vez.');
+    const ipUsuario = obtenerIP();
+    const ipVotoAnterior === ipUsuario {
+      alert('solo un voto por usuario');
       return;
+    }
     }
 
     // Incrementar el contador de votos del país seleccionado
@@ -251,7 +254,6 @@ function votar() {
     // Actualizar la lista de países votados
     actualizarTopPaises();
   }
-}
 
 
 // Función para actualizar la lista de los 10 países más votados
