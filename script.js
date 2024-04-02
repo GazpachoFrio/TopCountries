@@ -233,13 +233,26 @@ function votar() {
   const select = document.getElementById('selectPaises');
   const paisSeleccionado = paises.find(pais => pais.id === parseInt(select.value));
   if (paisSeleccionado) {
+    // Verificar si el usuario ya votó
+    const usuarioYaVoto = localStorage.getItem('usuarioVoto');
+    if (usuarioYaVoto) {
+      alert('Ya has votado anteriormente. Solo puedes votar una vez.');
+      return;
+    }
+
+    // Incrementar el contador de votos del país seleccionado
     paisSeleccionado.votos++;
+
+    // Guardar el estado de que el usuario ya votó
+    localStorage.setItem('usuarioVoto', true);
+
     alert(`Has votado por ${paisSeleccionado.nombre}. Total de votos: ${paisSeleccionado.votos}`);
 
     // Actualizar la lista de países votados
     actualizarTopPaises();
   }
 }
+
 
 // Función para actualizar la lista de los 10 países más votados
 function actualizarTopPaises() {
@@ -257,3 +270,4 @@ function actualizarTopPaises() {
     topPaisesElement.appendChild(li);
   });
 }
+// Función para votar por un país
